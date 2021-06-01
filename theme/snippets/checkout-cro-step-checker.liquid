@@ -1,0 +1,13 @@
+{%- assign step = '' -%}
+{%- capture hack -%}{{ content_for_logo }}{%- endcapture -%}
+{%- assign hackedStep = hack | split:'<h1 class="visually-hidden">' | last | split:'</h1>' | first | downcase -%}
+{%- if hackedStep contains 'information' -%}
+  {%- assign step = 'customer_info' -%}
+{%- elsif hackedStep contains 'shipping' -%}
+  {%- assign step = 'shipping' -%}
+{%- elsif hackedStep contains 'payment' or hackedStep contains 'review' -%}
+  {%- assign step = 'payment' -%}
+{%- elsif hackedStep contains 'thank you' -%}
+  {%- assign step = 'complete' -%}
+{%- endif -%}
+{{- step -}}

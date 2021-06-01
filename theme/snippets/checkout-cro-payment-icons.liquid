@@ -1,0 +1,18 @@
+{%- comment -%}
+  Note: Add this in theme/layout/checkout.liquid ~ after content_for_layout tag
+{%- endcomment -%}
+{%- unless shop.enabled_payment_types == empty -%}
+  {%- capture step -%}{%- render 'checkout-cro-step-checker' -%}{%- endcapture -%}
+  {%- if step == 'payment' -%}
+    <div class="checkout-cro-payment-icons">
+      <span>Guaranteed safe and secure checkout!</span>
+      <ul>
+        {%- for type in shop.enabled_payment_types -%}
+          <li>
+            {{ type | payment_type_svg_tag: class: 'icon' }}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+{%- endunless -%}

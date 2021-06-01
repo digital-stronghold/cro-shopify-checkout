@@ -1,0 +1,32 @@
+{%- capture step -%}{%- render 'checkout-cro-step-checker' -%}{%- endcapture -%}
+{%- case step -%}
+  {%- when 'customer_info' or 'shipping' -%}
+    {%- assign orderHasWorkshopItems = false -%}
+    {%- for line in checkout.line_items -%}
+      {%- for p in line.properties -%}
+        {%- case p.last -%}
+          {%- when 'pre-order' or 'crowd-sourced' -%}
+            {%- assign orderHasWorkshopItems = true -%}
+            {%- break -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    <div class="checkout-cro-why-us">
+      <h2>Why choose us?</h2>
+      <div>
+        {%- render 'icon', name: 'shirt' -%}
+        <h3>Long Haul Guarantee</h3>
+        <p>Responsibly Built for the Long Haul is more than a motto; it&rsquo;s a guarantee. Should you receive a defective product, or encounter damage beyond normal wear-and-tear, we offer free repairs and/or replacements.</p>
+      </div>
+      <div>
+        {%- render 'icon', name: 'package' -%}
+        <h3>Free Domestic Shipping &amp; Returns</h3>
+        <p>We get it: shopping online can feel a bit like rolling the dice. We want our customers to feel confident when they hit that &ldquo;Checkout&rdquo; button, so we offer free domestic shipping and returns.{% if orderHasWorkshopItems %} Heads up, Workshop products have a $6 shipping fee.{% endif %}</p>
+      </div>
+      <div>
+        {%- render 'icon', name: 'coin-fine' -%}
+        <h3>Welcome To The Club</h3>
+        <p>With our Common Club program, you&rsquo;ll automatically earn {% if customer and customer.tags contains 'VIP' %}7{% else %}5{% endif %}% in store credit back from each purchase you make. You&rsquo;d be surprised at just how quickly those numbers add up.</p>
+      </div>
+    </div>
+{%- endcase -%}

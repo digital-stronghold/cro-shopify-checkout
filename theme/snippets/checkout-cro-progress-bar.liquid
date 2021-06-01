@@ -1,0 +1,36 @@
+{%- capture step -%}{%- render 'checkout-cro-step-checker' -%}{%- endcapture -%}
+{%- comment -%}
+  <script>
+    T3Core.Debug('Checkout CRO - (hacked) step: {{ step }}');
+  </script>
+{%- endcomment -%}
+<div class="checkout-cro-progress-wrapper{% if step == 'complete' %} checkout-cro-progress-complete{% endif %}">
+  <div class="wrap">
+    <div class="checkout-cro-progress-inner">
+      <div class="checkout-cro-progress-step checkout-cro-progress-step-complete">
+        <span>
+          {%- if step == 'shipping' or step == 'payment' -%}
+            {%- render 'icon', name: 'check' -%}
+          {%- endif -%}
+          1. Customer
+        </span>
+      </div>
+      <div class="checkout-cro-progress-step{% if step == 'shipping' or step == 'payment' %} checkout-cro-progress-step-complete{% endif %}">
+        <span>
+          {%- if step == 'payment' -%}
+            {%- render 'icon', name: 'check' -%}
+          {%- endif -%}
+          2. Shipping
+        </span>
+      </div>
+      <div class="checkout-cro-progress-step{% if step == 'payment' %} checkout-cro-progress-step-complete{% endif %}">
+        <span>
+          {%- if step == 'complete' -%}
+            {%- render 'icon', name: 'check' -%}
+          {%- endif -%}
+          3. Payment
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
