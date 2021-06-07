@@ -11,3 +11,48 @@
     margin-left: 1px;
   }
 }
+
+.checkout-cro-why-us{
+  h2{
+    display: flex;
+    align-items: center;
+    margin: 2em 0 3em;
+    text-align: center;
+    @include preHeading($fs: 12px);
+    &::before,
+    &::after{
+      flex: 2 2 auto;
+      border-top: 1px solid rgba(175, 175, 175, 0.34); // default checkout border style
+      content: '';
+    }
+    &::before{ margin-right: 1em;}
+    &::after{ margin-left: 1em;}
+  }
+  > div{
+    position: relative;
+    margin-bottom: 2em;
+    padding-left: 90px;
+  }
+  h3{
+    margin: 0 0 1em;
+    font-size: 16px;
+  }
+  p{ font-size: 11px;}
+  svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 60px;
+  }
+
+  .order-summary--is-collapsed ~ &{
+    display: none;
+
+    @include for-tablet-landscape-up{ display: block;}
+  }
+}
+
+// override default checkout classes to make room for .checkout-cro-why-us
+
+.order-summary__sections{ height: auto;}
